@@ -8,6 +8,7 @@ import { MaterialModule } from '../material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { UserManagementComponent } from './user-management/user-management.component';
 import { ReceiptLookupComponent } from './receipt-lookup/receipt-lookup.component';
+import { CommonModule } from '@angular/common';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { ReceiptLookupComponent } from './receipt-lookup/receipt-lookup.componen
     ReceiptLookupComponent,
   ],
   imports: [
+    CommonModule,
     ManagerRoutingModule,
     MaterialModule,
     FlexLayoutModule

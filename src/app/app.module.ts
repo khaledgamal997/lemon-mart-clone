@@ -1,23 +1,30 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { AuthHttpInterceptor } from './auth/auth-http-interceptor';
+import { InMemoryAuthService } from './auth/auth.inmemory.service';
+import { AuthService } from './auth/auth.service';
 import { HomeComponent } from './home/home.component';
-import { InventoryModule } from './inventory/inventory.module';
+import { LoginComponent } from './login/login.component';
 import { MaterialModule } from './material.module';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { PosModule } from './pos/pos.module';
-import { UserModule } from './user/user.module';
+import { SimpleDialogComponent } from './common/simple-dialog.component';
+import { NavigationMenuComponent } from './navigation-menu/navigation-menu.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    LoginComponent,
+    SimpleDialogComponent,
+    NavigationMenuComponent,
   ],
   imports: [
     BrowserModule,
@@ -25,12 +32,20 @@ import { UserModule } from './user/user.module';
     BrowserAnimationsModule,
     MaterialModule,
     FlexLayoutModule,
-    InventoryModule,
-    PosModule,
-    UserModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule,
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    {
+      provide: AuthService,
+      useClass: InMemoryAuthService
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthHttpInterceptor,
+      multi: true
+    },
+  ],
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

@@ -10,7 +10,8 @@ import { Component } from '@angular/core';
     .active-link{
       font-weight:bold;
       border-bottom: 2px  solid #005005;
-    },
+    }`,
+    `
     a {
       text-decoration:none;
     }
@@ -18,28 +19,38 @@ import { Component } from '@angular/core';
   ],
   template: `
   <div flexLayout>
-  <mat-toolbar color ="primary">
+  <mat-toolbar fxLayoutGap="8px" color ="primary">
     <a mat-button
     routerLink="/manager/home"
     routerLinkActive="active-link"
-    style="text-decoration: none;"
     >
       Manager's Dashboard
     </a>
     <a mat-button
     routerLink="/manager/users"
     routerLinkActive="active-link"
-    style="text-decoration: none;"
     >
       User Management
     </a>
     <a mat-button
      routerLink="/manager/receipts"
      routerLinkActive="active-link"
-     style="text-decoration: none;"
      >
      Receipt Lookup
     </a>
+    <span class="flex-spacer"></span>
+    <button
+      mat-icon-button routerLink="/inventory"
+      matTooltip="Inventory" aria-label="Inventory"
+      >
+      <mat-icon>list</mat-icon>
+    </button>
+    <button
+      mat-icon-button routerLink="/pos"
+      matTooltip="POS" aria-label="POS"
+      >
+      <mat-icon>shopping_cart</mat-icon>
+    </button>
   </mat-toolbar>
   </div>
   <router-outlet></router-outlet>
